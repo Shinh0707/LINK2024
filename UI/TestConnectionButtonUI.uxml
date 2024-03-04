@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:GroupBox style="width: 142px; align-self: flex-end; align-items: center; justify-content: space-between;">
+            <ui:Button text="Host" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HostButton" focusable="false" style="height: 43px; -unity-text-align: middle-center; width: 121px;" />
+            <ui:Button text="Client" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ClientButton" focusable="false" style="height: 43px; -unity-text-align: middle-center; width: 121px;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>
