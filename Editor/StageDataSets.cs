@@ -13,87 +13,50 @@ public class CharacterStageData
 [Serializable]
 public class StageData
 {
-    [Header("基本設定")]
-    [Tooltip("ステージに対応するシーン")]
-    public SceneObject StageScene;
+    [Serializable]
+    public enum StageMode
+    {
+        None,Man,Child
+    }
     [Header("大人プレイヤー設定")]
+    public SceneObject ManStageScene;
     public CharacterStageData Man;
     [Header("子供プレイヤー設定")]
+    public SceneObject ChildStageScene;
     public CharacterStageData Child;
+
+    public string GetStageName(StageMode stageMode)
+    {
+        if (stageMode == StageMode.Child) return ChildStageScene;
+        if (stageMode == StageMode.Man) return ManStageScene;
+        return null;
+    }
 }
 
 [Serializable]
-public class ItemCondition
+public class LocalTransformPreview
 {
-    [Serializable]
-    [Flags]
-    public enum Set
-    {
-        [Description("配置自由")]
-        Free = 0,
-        [Description("配置必須")]
-        Must = 1
-    }
-    [Tooltip("ステージの配置方法")]
-    public Set SetMode = Set.Free;
-    [Serializable]
-    [Flags]
-    public enum Visible
-    {
-        None = 0,
-        Man = 1,
-        Child = 2,
-        Both = 3
-    }
-    [Tooltip("誰に見えるか")]
-    public Visible VisibleMode = Visible.Both;
-    public Vector3 Position;
-    public Vector3 Rotation;
+    public LocalTransform m_localTransform;
+    public bool preview = false;
 }
 
 [Serializable]
-public class ItemRange : MonoBehaviour
-{
-    [Tooltip("出現の個数範囲を個別に決めるか")]
-    public bool MinMaxSetSeparate = false;
-    public ItemSetRange InMan;
-    public ItemSetRange InChild;
-}
-
-[Serializable]
-public class ItemSetRange
-{
-    [Tooltip("アイテムの最小出現個数")]
-    public int Min = 0;
-    [Tooltip("アイテムの最大出現個数")]
-    public int Max = 1;
-    public bool modified = false;
-
-    public ItemSetRange(int Min,int Max)
-    {
-        this.Min = Min;
-        this.Max = Max;
-    }
-    public ItemSetRange(ItemSetRange itemSetRange)
-    {
-        Min = itemSetRange.Min;
-        Max = itemSetRange.Max;
-    }
-}
-[Serializable]
-public class ItemData : MonoBehaviour
+public class ItemData
 {
     [Tooltip("アイテムのプレファブ")]
     public GameObject Object;
-    [Header("出現設定")]
-    public ItemRange ItemRange;
-    [Tooltip("アイテムの出現情報")]
-    public List<ItemCondition> itemConditions = new();
+    public bool Preview = false;
+    [Tooltip("大人側のTransformの候補")]
+    public List<LocalTransformPreview> MansTransforms;
+    [Tooltip("子供側のTransformの候補")]
+    public List<LocalTransformPreview> ChildsTransforms;
 }
 
 [CreateAssetMenu(menuName = "DataSets/Stage Data", fileName = "StageDataSets")]
 public class StageDataSets : ScriptableObject
 {
     public StageData StageData;
+    public StageData.StageMode previewMode= StageData.StageMode.None;
+
     public List<ItemData> ItemDataList;
 }

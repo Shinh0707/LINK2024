@@ -13,10 +13,27 @@ MonoBehaviour:
   m_Name: StageDataSets
   m_EditorClassIdentifier: 
   StageData:
-    StageScene:
-      m_SceneName: 
+    ManStageScene:
+      m_SceneName: Playground
     Man:
       StartPosition: {x: 0, y: 0, z: 0}
+    ChildStageScene:
+      m_SceneName: Playground
     Child:
       StartPosition: {x: 0, y: 0, z: 0}
-  ItemDataList: []
+  previewMode: 2
+  ItemDataList:
+  - Object: {fileID: 0}
+    Preview: 1
+    MansTransforms:
+    - m_localTransform:
+        position: {x: 0, y: 0, z: 0}
+        rotation: {x: 0, y: 0, z: 0}
+        scale: {x: 0, y: 0, z: 0}
+      preview: 0
+    ChildsTransforms:
+    - m_localTransform:
+        position: {x: 0, y: 0, z: 0}
+        rotation: {x: 0, y: 0, z: 0}
+        scale: {x: 0, y: 0, z: 0}
+      preview: 0
