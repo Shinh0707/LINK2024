@@ -120,7 +120,7 @@ namespace LINKAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-            if (IsOwner)
+			if (IsOwner)
             {
                 // get a reference to our main camera
                 if (_mainCamera == null)
@@ -147,7 +147,7 @@ namespace LINKAssets
             _fallTimeoutDelta = FallTimeout;
         }
 
-		private void Start()
+        private void Start()
 		{
 
 		}
