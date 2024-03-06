@@ -46,7 +46,7 @@ public class ConnectionManager : MonoBehaviour
         NetworkManager.Singleton.StartHost();
         //ƒV[ƒ“‚ğØ‚è‘Ö‚¦
         m_EyeEffectAnimator.SetBool("EyeCloseTrigger", false);
-        NetworkManager.Singleton.SceneManager.LoadScene(StartingScene, LoadSceneMode.Single);
+        SceneManager.LoadScene(StartingScene, LoadSceneMode.Single);
     }
 
     public void StartClient()
@@ -68,7 +68,7 @@ public class ConnectionManager : MonoBehaviour
             float time = 0f;
             while (time < timeOut) 
             {
-                if (StartingScene.NameIs(SceneManager.GetActiveScene().name)) {
+                if (NetworkManager.Singleton.ConnectedHostname != "") {
                     m_EyeEffectAnimator.SetBool("EyeCloseTrigger", false);
                     Debug.Log("Start as Client");
                     yield break;

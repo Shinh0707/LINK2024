@@ -22,6 +22,11 @@ public class SceneObject
     {
         return m_SceneName == name;
     }
+
+    public string GetName()
+    {
+        return m_SceneName;
+    }
 }
 
 #if UNITY_EDITOR
@@ -39,6 +44,24 @@ public class SceneObjectEditor : PropertyDrawer
             if (scene.path.IndexOf(sceneObjectName) != -1)
             {
                 return AssetDatabase.LoadAssetAtPath(scene.path, typeof(SceneAsset)) as SceneAsset;
+            }
+        }
+
+        Debug.Log("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in the build settings.");
+        return null;
+    }
+
+    public static string GetScenePath(string sceneObjectName)
+    {
+        if (string.IsNullOrEmpty(sceneObjectName))
+            return null;
+
+        for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
+        {
+            EditorBuildSettingsScene scene = EditorBuildSettings.scenes[i];
+            if (scene.path.IndexOf(sceneObjectName) != -1)
+            {
+                return scene.path;
             }
         }
 
